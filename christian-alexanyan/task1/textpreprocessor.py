@@ -1,6 +1,4 @@
 # Preprocessor class for text preprocessing tasks such as tokenization, lowercasing, punctuation removal, stopword removal, stemming, and lemmatization.
-from email.mime import text
-
 
 class Preprocessor:
     def __init__(self, text=""):
