@@ -10,6 +10,7 @@ class Preprocessor:
         self.apostrophesvocab = {"'s" : "is", "'ve" : "have", "'re" : "are", "'ll" : "will", "'d" : "had", "'m" : "am", "n't" : "not"}
         # Initialize the stemming set with common suffixes. You can expand this set with more suffixes as needed.
         self.stemmingset = {'ingly', 'edly', 'ation', 'ness', 'able', 'ible', 'less', 'ship','ing', 'ion', 'est', 'ful', 'ous', 'ity', 'ive', 'ies', 'ied','edly', 'ed', 'es', 'ly', 'er', 'or', 's'}
+        self.stemmingset = sorted(self.stemmingset, key=lambda x: len(x), reverse=True)  # Sort the suffixes by length in descending order for proper stemming.
         # Initialize the lemmatization vocabulary (like irregular verbs, plural forms, etc.) with common irregular forms and their base forms. You can expand this dictionary with more words as needed.
         self.lemmatizationvocab = {
             'used': 'use',
@@ -137,7 +138,7 @@ if __name__ == "__main__":
     removed_punctuation_text = text_preprocessor.remove_punctuation(lowcased_text)
     removed_stopwords_text = text_preprocessor.remove_stopwords(removed_punctuation_text)
     stemmed_text = text_preprocessor.stemming(removed_stopwords_text)
-    lemmatized_text = text_preprocessor.lemmatization(stemmed_text)
+    lemmatized_text = text_preprocessor.lemmatization(removed_stopwords_text)
     print(":: Step 1 Tokenization :: \n-------------------------------\n", tokenized_text, "\n")
     print(":: Step 2 Lowercasing :: \n-------------------------------\n", lowcased_text, "\n")
     print(":: Step 3 Remove Punctuation :: \n-------------------------------\n", removed_punctuation_text, "\n")
